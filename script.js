@@ -1,18 +1,20 @@
 "use strict";
-const input = document.querySelector('input');
-const total = localStorage.getItem('total');
-if (input && total) {
-    const totalMudou = () => {
-        const value = input.value;
-        localStorage.setItem('total', value);
-    };
-    const calcularGanho = (value) => {
-        const p = document.querySelector('p');
-        if (p) {
-            p.innerText = `Ganho Total: R$ ${value + 100 - value * 0.2}`;
-        }
-    };
-    input.value = total;
-    calcularGanho(Number(input.value));
-    input.addEventListener('keyup', totalMudou);
+const frase = 'Front-end';
+const preco = 200;
+const condicao = preco > 100;
+console.log(typeof frase);
+console.log(typeof preco);
+console.log(typeof []);
+console.log(typeof {});
+console.log(typeof document);
+console.log(typeof window);
+console.log(typeof null);
+console.log(typeof undefined);
+if (typeof frase === 'string') {
+    console.log(frase.toLowerCase());
 }
+const txt = new String('Hello World');
+const txtFunc = String('Fala dev');
+console.log(txt.toUpperCase());
+console.log(txtFunc.toUpperCase());
+console.log(typeof String);
