@@ -1,24 +1,23 @@
-const frase = 'Front-end';
-const preco = 200;
-const condicao = preco > 100;
+let total: string | number = 200;
+total = '400';
 
-console.log(typeof frase);
-console.log(typeof preco);
-console.log(typeof []);
-console.log(typeof {});
-console.log(typeof document);
-console.log(typeof window);
-console.log(typeof null);
-console.log(typeof undefined);
+function isNumber(value: string | number) {
+  if (typeof value === 'number') {
+    return true;
+  }
 
-if (typeof frase === 'string') {
-  console.log(frase.toLowerCase());
+  return 'Não é um number';
 }
 
-const txt = new String('Hello World');
-const txtFunc = String('Fala dev');
+console.log(isNumber(200));
+console.log(isNumber('Hello World'));
 
-console.log(txt.toUpperCase());
-console.log(txtFunc.toUpperCase());
+if (isNumber('200')) {
+  console.log('É um número');
+}
 
-console.log(typeof String);
+// O ideal é sempre retornar um valor de apenas um tipo
+
+const button = document.querySelector('button');
+
+button?.click();
