@@ -1,29 +1,9 @@
-const produto: string = 'Livro';
-const preco: number = 200;
-
-const carro: {
-  marca: string;
-  cv: number;
-} = {
-  marca: 'Audi',
-  cv: 450,
-};
-
-const barato = 200 < 400 ? true : 'Caro demais, slk não compensa';
-
-function somar(x: number, y: number) {
-  return x + y;
+function normalizarTexto(txt: string) {
+  return txt.trim().toLowerCase();
 }
 
-somar(8, 10);
+const textoBruto = normalizarTexto(
+  '        Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, COMO também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. se popularizou na dÉcaDA de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais RECENTEMENTE quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.       ',
+);
 
-const nintendo = {
-  nome: 'Nintendo',
-  ano: '2000',
-};
-
-function transformarPreco(produto: { nome: string; ano: string }) {
-  console.log(produto);
-}
-
-transformarPreco(nintendo);
+console.log(textoBruto);
