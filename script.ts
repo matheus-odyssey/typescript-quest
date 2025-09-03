@@ -1,23 +1,21 @@
-let total: string | number = 200;
-total = '400';
+// 1 - Crie uma função chamada toNumber
+// 2 - A função pode receber number | string
+// 3 - Se a função receber um número, retorne um número
+// 4 - Se a função receber uma string, retorne um número
+// 5 - Se ela receber algo diferente, retorne um erro. (throw "value deve ser um número ou uma string")
 
-function isNumber(value: string | number) {
+function toNumber(value: string | number) {
   if (typeof value === 'number') {
-    return true;
+    return value;
   }
 
-  return 'Não é um number';
+  if (typeof value === 'string') {
+    return Number(value);
+  }
+
+  throw new Error('value deve ser uma string ou number');
 }
 
-console.log(isNumber(200));
-console.log(isNumber('Hello World'));
-
-if (isNumber('200')) {
-  console.log('É um número');
-}
-
-// O ideal é sempre retornar um valor de apenas um tipo
-
-const button = document.querySelector('button');
-
-button?.click();
+console.log(toNumber('150'));
+console.log(toNumber(340));
+// console.log(toNumber(true));
