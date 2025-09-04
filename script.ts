@@ -5,13 +5,19 @@ let total: NumberOrString = 20;
 
 total = '10';
 
-type Produto = {
+interface InterfaceProduto {
+  nome: string;
+  preco: number;
+  webcam: boolean;
+}
+
+type TypeProduto = {
   nome: string;
   preco: number;
   webcam: boolean;
 };
 
-function preencherDados(dados: Produto) {
+function preencherDados(dados: TypeProduto) {
   document.body.innerHTML += `
   <div>
     <h2>${dados.nome}</h2>
