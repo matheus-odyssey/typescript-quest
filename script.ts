@@ -1,41 +1,36 @@
-// Fora do modo estrito, o TypeScript permitirá o uso de parâmetros sem especificarmos o tipo. Esses parâmetros terão o tipo implícito de any.
+const button = document.querySelector('button');
+const config = localStorage.getItem('config');
 
-function normalizarTexto(texto: any) {
-  return texto.trim().toLowerCase();
+if (button) button.click();
+
+config?.toLowerCase();
+
+console.log(typeof null);
+
+let total;
+
+console.log(total);
+
+console.log(typeof undefined);
+
+total = 10;
+
+// Props opcionais
+interface Product {
+  nome?: string;
 }
 
-console.log(normalizarTexto('       BaCK-ENd      '));
-// console.log(normalizarTexto(200));
+const jogo: Product = { nome: 'Ragnarok' };
+const livro: Product = {};
 
-// Em alguns casos o any faz sentido, como no caso da função json() onde qualquer tipo de dado pode ser retornado, dependendo da API que acessarmos.
-function manipularData(data: { nome: string }) {
-  console.log(data.nome);
-}
+jogo.nome;
+livro.nome?.toLowerCase();
 
-async function fetchJSON(url: string) {
-  const response = await fetch(url);
-  const data = await response.json();
-  manipularData(data);
-}
-
-fetchJSON('https://api.origamid.dev/json/cursos.json');
-
-interface Curso {
-  nome: string;
-  horas: number;
-}
-
-function mostrarCursos(cursos: Curso[]) {
-  cursos.forEach((curso) => {
-    document.body.innerHTML += `
-      <div>
-        <h2>${curso.nome}</h2>
-        <p>Horas: ${curso.horas}</p>
-      </div>
-    `;
-  });
-}
-
-const dados: any = 'o any gera problemas';
-
-mostrarCursos(dados);
+// Sem o strictNullChecks como true, o TypeScript assume que qualquer valor pode incluir null | undefined e consequentemente para de checar casos onde realmente o null | undefined podem ser retornados.
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "strict": true, // já incluso no strict
+//     "strictNullChecks": true
+//   }
+// }
