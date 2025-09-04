@@ -1,44 +1,34 @@
-// A palavra chave type cria um alias para um tipo customizado
-type NumberOrString = string | number;
+// Defina a interface da API: https://api.origamid.dev/json/notebook.json e mostre os dados na tela.
 
-let total: NumberOrString = 20;
-
-total = '10';
-
-interface InterfaceProduto {
+interface Empresa {
   nome: string;
-  preco: number;
-  webcam: boolean;
+  fundacao: number;
+  pais: string;
 }
 
-type TypeProduto = {
+interface Produto {
   nome: string;
-  preco: number;
-  webcam: boolean;
-};
+  preco: 2000;
+  descricao: string;
+  garantia: string;
+  seguroAcidente: boolean;
+  empresaFabricante: Empresa;
+  empresaMontadora: Empresa;
+}
 
-function preencherDados(dados: TypeProduto) {
-  document.body.innerHTML += `
-  <div>
-    <h2>${dados.nome}</h2>
-    <p>R$ ${dados.preco}</p>
-    <p>Inclui Webcam: ${dados.webcam ? 'sim' : 'não'}</p>
-  </div>
+function showProduct(data: Produto) {
+  document.body.innerHTML = `
+    <div>
+      <h2>${data.nome}</h2>
+    </div>
   `;
 }
 
-const notebook: Produto = { nome: 'Notebook', preco: 3000, webcam: true };
+async function fetchProduct() {
+  const response = await fetch('https://api.origamid.dev/json/notebook.json');
+  const data = await response.json();
 
-preencherDados(notebook);
-
-preencherDados({ nome: 'Computador', preco: 3000, webcam: false });
-
-type Stacks = 'back-end' | 'front-end' | 'fullstack';
-
-function imprimirStack(stack: Stacks) {
-  console.log(stack);
+  showProduct(data);
 }
 
-imprimirStack('back-end');
-imprimirStack('front-end');
-imprimirStack('fullstack');
+fetchProduct();
