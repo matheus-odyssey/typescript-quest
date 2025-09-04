@@ -1,34 +1,21 @@
-// Defina a interface da API: https://api.origamid.dev/json/notebook.json e mostre os dados na tela.
+// arrays
 
-interface Empresa {
-  nome: string;
-  fundacao: number;
-  pais: string;
+const numeros = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const valores = [10, 20, 'Taxas', 40, 50, 'Produto', 70, 80, 'Descontos', 100];
+
+function maioresQue50(data: number[]) {
+  return data.filter((n) => n > 50);
 }
 
-interface Produto {
-  nome: string;
-  preco: 2000;
-  descricao: string;
-  garantia: string;
-  seguroAcidente: boolean;
-  empresaFabricante: Empresa;
-  empresaMontadora: Empresa;
+// data: (string | number)[]
+function filtrarValores(data: Array<number | string>) {
+  return data.filter((item) => typeof item === 'number');
 }
 
-function showProduct(data: Produto) {
-  document.body.innerHTML = `
-    <div>
-      <h2>${data.nome}</h2>
-    </div>
-  `;
-}
+console.log(maioresQue50(numeros));
+console.log(filtrarValores(valores));
 
-async function fetchProduct() {
-  const response = await fetch('https://api.origamid.dev/json/notebook.json');
-  const data = await response.json();
-
-  showProduct(data);
-}
-
-fetchProduct();
+const dados = [
+  ['Guerra Ininita', 2019],
+  ['Ultimato', 2019],
+];
