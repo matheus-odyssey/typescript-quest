@@ -1,45 +1,8 @@
 "use strict";
-class Produto {
-    nome;
-    constructor(nome) {
-        this.nome = nome;
-    }
+// Selecione o link utilizando o método getElementById.
+// Substitua o href do link (HTMLAnchorElement) de http:// para https://.
+const link = document.getElementById('origamid');
+if (link instanceof HTMLAnchorElement) {
+    link.href = link.href.replace('http://', 'https://');
+    console.log(link.href);
 }
-class Livro extends Produto {
-    autor;
-    constructor(nome, autor) {
-        super(nome);
-        this.autor = autor;
-    }
-}
-class Jogo extends Produto {
-    jogadores;
-    constructor(nome, jogadores) {
-        super(nome);
-        this.jogadores = jogadores;
-    }
-}
-function buscarProduto(busca) {
-    if (busca === 'O Hobbit') {
-        return new Livro('O Hobbit', 'J. R. R. Tolkien');
-    }
-    if (busca === 'Dark Souls') {
-        return new Jogo('Dark Souls', 1);
-    }
-    return null;
-}
-const produto = buscarProduto('O Hobbit');
-if (produto instanceof Livro) {
-    console.log(produto.autor);
-}
-if (produto instanceof Jogo) {
-    console.log(produto.jogadores);
-}
-if (produto instanceof Produto) {
-    console.log(produto);
-    console.log(produto.nome);
-}
-const honda = {
-    nome: 'Honda',
-};
-console.log(honda instanceof Carro);
