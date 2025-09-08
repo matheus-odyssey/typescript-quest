@@ -1,14 +1,16 @@
+// Selecione os elementos com a classe link.
+// Crie uma função que deve ser executada para cada elemento.
+// Modificar através da função o estilo da color e border.
+
 const links = document.querySelectorAll('.link')
 
-links.forEach((link) => {
-  if (link instanceof HTMLAnchorElement) {
-    console.log(link.href)
+function styleLink(link: HTMLElement) {
+  link.style.color = 'tomato'
+  link.style.border = '1px solid #222'
+}
+
+links.forEach((item) => {
+  if (item instanceof HTMLElement) {
+    styleLink(item)
   }
 })
-
-const arrayLinks = Array.from(links)
-const anchorLinks = arrayLinks.filter((link) => {
-  return link instanceof HTMLAnchorElement
-})
-
-console.log(anchorLinks)
