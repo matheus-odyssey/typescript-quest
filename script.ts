@@ -1,9 +1,14 @@
-// Selecione o link utilizando o método getElementById.
-// Substitua o href do link (HTMLAnchorElement) de http:// para https://.
+const links = document.querySelectorAll('.link')
 
-const link = document.getElementById('origamid');
+links.forEach((link) => {
+  if (link instanceof HTMLAnchorElement) {
+    console.log(link.href)
+  }
+})
 
-if (link instanceof HTMLAnchorElement) {
-  link.href = link.href.replace('http://', 'https://');
-  console.log(link.href);
-}
+const arrayLinks = Array.from(links)
+const anchorLinks = arrayLinks.filter((link) => {
+  return link instanceof HTMLAnchorElement
+})
+
+console.log(anchorLinks)
