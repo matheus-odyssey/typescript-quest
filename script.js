@@ -1,21 +1,12 @@
 "use strict";
 const btn = document.querySelector('button');
+// function handleClick(this: HTMLButtonElement, event: MouseEvent) {
+//   console.log(this, event)
+// }
 function handleClick(event) {
-    console.log(event.pageX);
-}
-btn?.addEventListener('pointerdown', handleClick);
-function handleScroll(event) {
-    console.log(event);
-}
-window.addEventListener('scroll', handleScroll);
-function ativarMenu(event) {
-    if (event instanceof MouseEvent) {
-        console.log(event.pageX);
-    }
-    if (event instanceof TouchEvent) {
-        console.log(event.touches[0].pageX);
+    const { currentTarget } = event;
+    if (currentTarget instanceof HTMLElement) {
+        console.log(currentTarget.textContent);
     }
 }
-document.documentElement.addEventListener('mousedown', ativarMenu);
-document.documentElement.addEventListener('touchstart', ativarMenu);
-window.addEventListener('mousedown', ativarMenu);
+btn?.addEventListener('click', handleClick);
