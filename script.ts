@@ -1,16 +1,27 @@
-// Selecione os elementos com a classe link.
-// Crie uma função que deve ser executada para cada elemento.
-// Modificar através da função o estilo da color e border.
+const btn = document.querySelector('button')
 
-const links = document.querySelectorAll('.link')
-
-function styleLink(link: HTMLElement) {
-  link.style.color = 'tomato'
-  link.style.border = '1px solid #222'
+function handleClick(event: PointerEvent) {
+  console.log(event.pageX)
 }
 
-links.forEach((item) => {
-  if (item instanceof HTMLElement) {
-    styleLink(item)
+btn?.addEventListener('pointerdown', handleClick)
+
+function handleScroll(event: Event) {
+  console.log(event)
+}
+
+window.addEventListener('scroll', handleScroll)
+
+function ativarMenu(event: Event) {
+  if (event instanceof MouseEvent) {
+    console.log(event.pageX)
   }
-})
+
+  if (event instanceof TouchEvent) {
+    console.log(event.touches[0].pageX)
+  }
+}
+
+document.documentElement.addEventListener('mousedown', ativarMenu)
+document.documentElement.addEventListener('touchstart', ativarMenu)
+window.addEventListener('mousedown', ativarMenu)
