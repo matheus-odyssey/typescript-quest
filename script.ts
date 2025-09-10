@@ -1,42 +1,43 @@
-// function retorno<variavel>(a: variavel): variavel {
-//   return a
-// }
+{
+  function extractText<Tipo extends HTMLElement>(el: Tipo) {
+    return {
+      text: el.textContent,
+      el,
+    }
+  }
 
-// console.log(retorno(2.567).toFixed(2))
-// console.log(retorno('Hello World').toLowerCase())
-// console.log(retorno(true).valueOf())
+  const link = document.querySelector('a')
 
-
-const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-const frutas = ['Banana', 'Pêra', 'Morango', 'Maçã', 'Uva', 'Abacaxi', 'Mamão', 'Melão', 'Kiwi', 'Limão']
-
-function firstFive<T>(arr: T[]): T[] {
-  return arr.slice(0, 5)
-}
-
-console.log(firstFive(numeros))
-console.log(firstFive(frutas))
-
-function notNull<T>(arg: T) {
-  if (arg !== null) {
-    return arg
-  } else {
-    return null
+  if (link) {
+    console.log(extractText(link).el)
   }
 }
 
-console.log(notNull(200)?.toFixed(2))
-console.log(notNull('Hello World')?.toLowerCase())
 
-
-function tipoDado<T>(data: T) {
-  return {
-    data,
-    type: typeof data,
+{
+  function $<T extends Element>(selector: string): T | null {
+    return document.querySelector(selector)
   }
+
+  const link = $<HTMLAnchorElement>('a')?.href
+
+  console.log(link)
 }
 
-console.log(tipoDado(300).type)
-console.log(tipoDado('Hello World').type)
-console.log(tipoDado(true).type)
-console.log(tipoDado(1e19).data)
+async function getData<T>(url: string): Promise<T> {
+  const response = await fetch(url)
+
+  return await response.json()
+}
+
+interface Notebook {
+  nome: string;
+}
+
+async function handleData() {
+  const notebook: Notebook = await getData('https://api.origamid.dev/json/notebook.json')
+
+  console.log(notebook.nome)
+}
+
+handleData()

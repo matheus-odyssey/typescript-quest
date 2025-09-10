@@ -1,34 +1,29 @@
 "use strict";
-// function retorno<variavel>(a: variavel): variavel {
-//   return a
-// }
-// console.log(retorno(2.567).toFixed(2))
-// console.log(retorno('Hello World').toLowerCase())
-// console.log(retorno(true).valueOf())
-const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const frutas = ['Banana', 'Pêra', 'Morango', 'Maçã', 'Uva', 'Abacaxi', 'Mamão', 'Melão', 'Kiwi', 'Limão'];
-function firstFive(arr) {
-    return arr.slice(0, 5);
-}
-console.log(firstFive(numeros));
-console.log(firstFive(frutas));
-function notNull(arg) {
-    if (arg !== null) {
-        return arg;
+{
+    function extractText(el) {
+        return {
+            text: el.textContent,
+            el,
+        };
     }
-    else {
-        return null;
+    const link = document.querySelector('a');
+    if (link) {
+        console.log(extractText(link).el);
     }
 }
-console.log(notNull(200)?.toFixed(2));
-console.log(notNull('Hello World')?.toLowerCase());
-function tipoDado(data) {
-    return {
-        data,
-        type: typeof data,
-    };
+{
+    function $(selector) {
+        return document.querySelector(selector);
+    }
+    const link = $('a')?.href;
+    console.log(link);
 }
-console.log(tipoDado(300).type);
-console.log(tipoDado('Hello World').type);
-console.log(tipoDado(true).type);
-console.log(tipoDado(1e19).data);
+async function getData(url) {
+    const response = await fetch(url);
+    return await response.json();
+}
+async function handleData() {
+    const notebook = await getData('https://api.origamid.dev/json/notebook.json');
+    console.log(notebook.nome);
+}
+handleData();
