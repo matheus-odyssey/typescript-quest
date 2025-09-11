@@ -1,29 +1,20 @@
 "use strict";
-{
-    function extractText(el) {
-        return {
-            text: el.textContent,
-            el,
-        };
+function somar(a, b, c) {
+    return a + b + (c ? c : 0);
+}
+console.log(somar(0.2, 0.8));
+const subtrair = (a, b) => a + b;
+console.log(subtrair(0.2, 0.8));
+function pintarTela(cor) {
+    document.body.style.backgroundColor = cor;
+}
+console.log(pintarTela('tomato'));
+const btn = document.querySelector('button');
+btn?.click();
+function isString(value) {
+    if (typeof value === 'string') {
+        return true;
     }
-    const link = document.querySelector('a');
-    if (link) {
-        console.log(extractText(link).el);
-    }
 }
-{
-    function $(selector) {
-        return document.querySelector(selector);
-    }
-    const link = $('a')?.href;
-    console.log(link);
-}
-async function getData(url) {
-    const response = await fetch(url);
-    return await response.json();
-}
-async function handleData() {
-    const notebook = await getData('https://api.origamid.dev/json/notebook.json');
-    console.log(notebook.nome);
-}
-handleData();
+console.log(isString('oi'));
+console.log(isString(12));

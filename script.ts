@@ -1,43 +1,32 @@
-{
-  function extractText<Tipo extends HTMLElement>(el: Tipo) {
-    return {
-      text: el.textContent,
-      el,
-    }
+function somar(a: number, b: number, c?: number): number {
+  return a + b + (c ? c : 0)
+}
+
+console.log(somar(0.2, 0.8))
+
+const subtrair = (a: number, b: number) => a + b
+
+console.log(subtrair(0.2, 0.8))
+
+type Callback = (event: MouseEvent) => void
+
+
+function pintarTela(cor: string): void {
+  document.body.style.backgroundColor = cor
+}
+
+console.log(pintarTela('tomato'))
+
+const btn = document.querySelector('button')
+
+btn?.click()
+
+
+function isString(value: any) {
+  if (typeof value === 'string') {
+    return true
   }
-
-  const link = document.querySelector('a')
-
-  if (link) {
-    console.log(extractText(link).el)
-  }
 }
 
-
-{
-  function $<T extends Element>(selector: string): T | null {
-    return document.querySelector(selector)
-  }
-
-  const link = $<HTMLAnchorElement>('a')?.href
-
-  console.log(link)
-}
-
-async function getData<T>(url: string): Promise<T> {
-  const response = await fetch(url)
-
-  return await response.json()
-}
-
-interface Notebook {
-  nome: string;
-}
-
-async function handleData() {
-  const notebook: Notebook = await getData('https://api.origamid.dev/json/notebook.json')
-
-  console.log(notebook.nome)
-}
-
-handleData()
+console.log(isString('oi'));
+console.log(isString(12));
