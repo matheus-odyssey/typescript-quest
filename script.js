@@ -18,3 +18,22 @@ function isString(value) {
 }
 console.log(isString('oi'));
 console.log(isString(12));
+function abortar(msg) {
+    throw new Error(msg);
+}
+function calcular(forma) {
+    forma.perimetro(4);
+}
+function normalizar(arg) {
+    if (typeof arg === 'string') {
+        return arg.trim().toLowerCase();
+    }
+    return arg.map((item) => item.trim().toLowerCase());
+}
+console.log(normalizar('    HEllO woRLd  '));
+console.log(normalizar(['   BAnaNA', '  AbAcAxI         ']));
+function $(selector) {
+    return document.querySelector(selector);
+}
+$('a')?.href;
+$('video')?.volume;

@@ -30,3 +30,44 @@ function isString(value: any) {
 
 console.log(isString('oi'));
 console.log(isString(12));
+
+
+function abortar(msg: string): never {
+  throw new Error(msg)
+}
+
+// abortar('Um erro ocorreu!')
+// console.log('Esse código não executa')
+
+interface Quadrado {
+  lado: 4;
+  perimetro(lado: number): number;
+}
+
+function calcular(forma: Quadrado) {
+  forma.perimetro(4)
+}
+
+// Overloads
+
+function normalizar(arg: string[]): string[];
+function normalizar(arg: string): string;
+function normalizar(arg: string | string[]) {
+  if (typeof arg === 'string') {
+    return arg.trim().toLowerCase()
+  }
+
+  return arg.map((item) => item.trim().toLowerCase())
+}
+
+console.log(normalizar('    HEllO woRLd  '))
+console.log(normalizar(['   BAnaNA', '  AbAcAxI         ']))
+
+function $(selector: 'a'): HTMLAnchorElement | null;
+function $(selector: 'video'): HTMLVideoElement | null;
+function $(selector: string): Element | null {
+  return document.querySelector(selector)
+}
+
+$('a')?.href
+$('video')?.volume
