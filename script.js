@@ -1,14 +1,34 @@
 "use strict";
-// Crie uma função que arredonda um valor passado para cima.
-// A função pode receber string ou number.
-// A função deve retornar o mesmo tipo que ela receber.
-function arredondarNumber(n) {
-    if (typeof n === 'number') {
-        return Math.ceil(n);
+// Guard, Safety e Narrowing
+function typeGuard(value) {
+    if (typeof value === 'string') {
+        return value.toLowerCase();
     }
-    else {
-        return Math.ceil(Number(n)).toString();
+    if (typeof value === 'number') {
+        return value.toFixed(1);
     }
 }
-console.log(arredondarNumber(2.3));
-console.log(arredondarNumber('1.3'));
+console.log(typeGuard(39));
+console.log(typeGuard('HeLLo WOrlD'));
+const obj = {
+    nome: 'João',
+    msg: 'hello world',
+};
+if ('msg' in obj) {
+    console.log('Existe');
+}
+function handleProduto(data) {
+    console.log(data);
+    if ('preco' in data) {
+        document.body.innerHTML += `
+    <p>Nome: ${data.nome}</p>
+    <p>Preço: ${data.preco + 100}</p>
+  `;
+    }
+}
+async function fetchProduto() {
+    const res = await fetch('https://api.origamid.dev/json/notebook.json');
+    const json = await res.json();
+    handleProduto(json);
+}
+fetchProduto();
