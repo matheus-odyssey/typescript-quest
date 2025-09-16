@@ -1,27 +1,27 @@
 "use strict";
-const video = document.querySelector('.player');
-console.log(video.volume);
-async function fetchProduto() {
-    const response = await fetch('https://api.origamid.dev/json/notebook.json');
-    return response.json();
+const { body } = document;
+//function handleData({ nome, preco }: { nome: string; preco: number })
+function handleData({ nome, preco }) {
+    nome.includes('book');
+    preco?.toFixed(2);
 }
-// Podemos usar o as em diferentes locais.
-async function handleProduto1() {
-    const produto = await fetchProduto();
-    produto.nome;
+handleData({
+    nome: 'Notebook',
+    preco: 234.67
+});
+function handleClick({ currentTarget, pageX, }) {
+    if (currentTarget instanceof HTMLElement) {
+        currentTarget.innerHTML = `<h1>Mouse Click em x:${pageX}</h1>`;
+    }
 }
-async function handleProduto2() {
-    const produto = (await fetchProduto());
-    produto.nome;
+document.documentElement.addEventListener('click', handleClick);
+function comparar(tipo, ...numeros) {
+    if (tipo === 'maior') {
+        return Math.max(...numeros);
+    }
+    if (tipo === 'menor') {
+        return Math.min(...numeros);
+    }
 }
-async function handleProduto3() {
-    const produto = await fetchProduto();
-    produto.nome;
-}
-// Non-null operator, só existe no TS
-const link = document.querySelector('a');
-console.log(link.href);
-document.querySelector('a').href = 'https://';
-const v1 = document.querySelector('.player');
-const v2 = document.querySelector('.player');
-const v3 = document.querySelector('.player');
+console.log(comparar('maior', 3, 2, 4, 30, 5, 6, 20));
+console.log(comparar('menor', 3, 2, 4, 1, 5, 6, 20));
