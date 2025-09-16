@@ -1,54 +1,41 @@
-// 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
-// 2 - Defina a interface da API
-// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
-// 4 - Use Type Guards para garantir a Type Safety do código
-// 5 - Preencha os dados da API na tela.
+const video = document.querySelector('.player') as HTMLVideoElement
 
-interface Curso {
-  nome: string
-  aulas: number
-  gratuito: boolean
-  horas: number
-  idAulas: number
-  nivel: 'iniciante' | 'avancado'
-  tags: string[]
+console.log(video.volume)
+
+interface Produto {
+  nome: string;
+  preco: number;
 }
 
-// Type Guard
-const isCurso = (value: unknown): value is Curso => {
-  if (
-    value
-    && typeof value === 'object'
-    && 'nome' in value
-    && 'horas' in value
-    && 'tags' in value
-  ) {
-    return true
-  } else {
-    return false
-  }
+async function fetchProduto() {
+  const response = await fetch('https://api.origamid.dev/json/notebook.json');
+  return response.json() as Promise<Produto>;
 }
 
-const handleCursos = (cursos: unknown) => {
-  if (Array.isArray(cursos)) {
-    cursos
-      .filter(isCurso)
-      .forEach((curso) => {
-        document.body.innerHTML += `
-          <h1>${curso.nome}</h1>
-          <p>${curso.horas}</p>
-          <p>Tags: ${curso.tags.join(', ')}</p>
-        `
-      })
-  }
+// Podemos usar o as em diferentes locais.
+async function handleProduto1() {
+  const produto = await fetchProduto();
+  produto.nome;
 }
 
-const fetchCursos = async (url: string) => {
-  const response = await fetch(url)
-  const json = await response.json()
-
-  handleCursos(json)
+async function handleProduto2() {
+  const produto = (await fetchProduto()) as Produto;
+  produto.nome;
 }
 
-fetchCursos('https://api.origamid.dev/json/cursos.json')
+async function handleProduto3() {
+  const produto = await fetchProduto();
+  (produto as Produto).nome;
+}
 
+// Non-null operator, só existe no TS
+
+const link = document.querySelector('a')!
+
+console.log(link.href)
+
+document.querySelector('a')!.href = 'https://'
+
+const v1 = document.querySelector('.player') as HTMLVideoElement
+const v2 = <HTMLVideoElement>document.querySelector('.player')
+const v3 = document.querySelector<HTMLVideoElement>('.player')
