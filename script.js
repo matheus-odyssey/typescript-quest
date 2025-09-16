@@ -1,44 +1,38 @@
 "use strict";
-function handleCursos(data) {
-    if (data instanceof Array) {
-        console.log('É uma instância de Array');
-    }
-    if (Array.isArray(data)) {
-        console.log('É uma array');
-    }
-}
-async function fetchCursos() {
-    const res = await fetch('https://api.origamid.dev/json/cursos.json');
-    const json = await res.json();
-    handleCursos(json);
-}
-fetchCursos();
-function isString(value) {
-    return typeof value === 'string';
-}
-function handleData(data) {
-    if (isString(data)) {
-        console.log(data.toLowerCase());
-    }
-}
-handleData(200);
-handleData('GitHub');
-function isProduto(value) {
-    if (value && typeof value === 'object' && 'nome' in value && 'preco' in value) {
+// 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
+// 2 - Defina a interface da API
+// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
+// 4 - Use Type Guards para garantir a Type Safety do código
+// 5 - Preencha os dados da API na tela.
+// Type Guard
+const isCurso = (value) => {
+    if (value
+        && typeof value === 'object'
+        && 'nome' in value
+        && 'horas' in value
+        && 'tags' in value) {
         return true;
     }
     else {
         return false;
     }
-}
-function handleProduto(data) {
-    if (isProduto(data)) {
-        console.log(data.nome.toLowerCase());
+};
+const handleCursos = (cursos) => {
+    if (Array.isArray(cursos)) {
+        cursos
+            .filter(isCurso)
+            .forEach((curso) => {
+            document.body.innerHTML += `
+          <h1>${curso.nome}</h1>
+          <p>${curso.horas}</p>
+          <p>Tags: ${curso.tags.join(', ')}</p>
+        `;
+        });
     }
-}
-async function fetchProduto() {
-    const response = await fetch('https://api.origamid.dev/json/notebook.json');
+};
+const fetchCursos = async (url) => {
+    const response = await fetch(url);
     const json = await response.json();
-    handleProduto(json);
-}
-fetchProduto();
+    handleCursos(json);
+};
+fetchCursos('https://api.origamid.dev/json/cursos.json');

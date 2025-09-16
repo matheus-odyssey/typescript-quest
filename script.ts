@@ -1,57 +1,54 @@
-function handleCursos(data: unknown) {
-  if (data instanceof Array) {
-    console.log('É uma instância de Array')
-  }
+// 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
+// 2 - Defina a interface da API
+// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
+// 4 - Use Type Guards para garantir a Type Safety do código
+// 5 - Preencha os dados da API na tela.
 
-  if (Array.isArray(data)) {
-    console.log('É uma array')
-  }
-}
-
-async function fetchCursos() {
-  const res = await fetch('https://api.origamid.dev/json/cursos.json')
-  const json = await res.json()
-
-  handleCursos(json)
-}
-
-fetchCursos()
-
-function isString(value: unknown): value is string {
-  return typeof value === 'string'
-}
-
-function handleData(data: unknown) {
-  if (isString(data)) {
-    console.log(data.toLowerCase())
-  }
-}
-
-handleData(200)
-handleData('GitHub')
-
-interface Produto {
+interface Curso {
   nome: string
-  preco: number
+  aulas: number
+  gratuito: boolean
+  horas: number
+  idAulas: number
+  nivel: 'iniciante' | 'avancado'
+  tags: string[]
 }
 
-function isProduto(value: unknown): value is Produto {
-  if (value && typeof value === 'object' && 'nome' in value && 'preco' in value) {
+// Type Guard
+const isCurso = (value: unknown): value is Curso => {
+  if (
+    value
+    && typeof value === 'object'
+    && 'nome' in value
+    && 'horas' in value
+    && 'tags' in value
+  ) {
     return true
   } else {
     return false
   }
 }
 
-function handleProduto(data: unknown) {
-  if (isProduto(data)) {
-    console.log(data.nome.toLowerCase())
+const handleCursos = (cursos: unknown) => {
+  if (Array.isArray(cursos)) {
+    cursos
+      .filter(isCurso)
+      .forEach((curso) => {
+        document.body.innerHTML += `
+          <h1>${curso.nome}</h1>
+          <p>${curso.horas}</p>
+          <p>Tags: ${curso.tags.join(', ')}</p>
+        `
+      })
   }
 }
 
-async function fetchProduto() {
-  const response = await fetch('https://api.origamid.dev/json/notebook.json');
-  const json = await response.json();
-  handleProduto(json);
+const fetchCursos = async (url: string) => {
+  const response = await fetch(url)
+  const json = await response.json()
+
+  handleCursos(json)
 }
-fetchProduto();
+
+fetchCursos('https://api.origamid.dev/json/cursos.json')
+
