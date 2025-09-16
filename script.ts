@@ -1,41 +1,32 @@
-const video = document.querySelector('.player') as HTMLVideoElement
-
-console.log(video.volume)
+const { body }: { body: HTMLElement } = document
 
 interface Produto {
-  nome: string;
-  preco: number;
+  nome: string
+  preco?: number
 }
 
-async function fetchProduto() {
-  const response = await fetch('https://api.origamid.dev/json/notebook.json');
-  return response.json() as Promise<Produto>;
+//function handleData({ nome, preco }: { nome: string; preco: number })
+function handleData({ nome, preco }: Produto) {
+  nome.includes('book')
+  preco?.toFixed(2)
 }
 
-// Podemos usar o as em diferentes locais.
-async function handleProduto1() {
-  const produto = await fetchProduto();
-  produto.nome;
+handleData({
+  nome: 'Notebook',
+  preco: 234.67
+})
+
+function handleClick({
+  currentTarget,
+  pageX,
+}: {
+  currentTarget: EventTarget | null;
+  pageX: number;
+}) {
+  if (currentTarget instanceof HTMLElement) {
+    currentTarget.innerHTML = `<h1>Mouse Click em x:${pageX}</h1>`;
+  }
 }
 
-async function handleProduto2() {
-  const produto = (await fetchProduto()) as Produto;
-  produto.nome;
-}
+document.documentElement.addEventListener('click', handleClick);
 
-async function handleProduto3() {
-  const produto = await fetchProduto();
-  (produto as Produto).nome;
-}
-
-// Non-null operator, só existe no TS
-
-const link = document.querySelector('a')!
-
-console.log(link.href)
-
-document.querySelector('a')!.href = 'https://'
-
-const v1 = document.querySelector('.player') as HTMLVideoElement
-const v2 = <HTMLVideoElement>document.querySelector('.player')
-const v3 = document.querySelector<HTMLVideoElement>('.player')
