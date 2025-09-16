@@ -1,44 +1,39 @@
-const { body }: { body: HTMLElement } = document
+type Produto = {
+  preco: number;
+};
 
-interface Produto {
+type Carro = {
+  rodas: number;
+  portas: number;
+};
+
+function handleProdutoCarro(dados: Carro & Produto) {
+  dados.rodas;
+  dados.portas;
+  dados.preco;
+}
+
+type Pessoa = {
+  nome: string,
+  idade: number,
+}
+
+type PessoaComCPF = Pessoa & {
+  cpf: string,
+}
+
+interface InterfacePessoa {
   nome: string
-  preco?: number
+  idade: number
 }
 
-//function handleData({ nome, preco }: { nome: string; preco: number })
-function handleData({ nome, preco }: Produto) {
-  nome.includes('book')
-  preco?.toFixed(2)
+interface InterfacePessoa {
+  cpf: string
 }
 
-handleData({
-  nome: 'Notebook',
-  preco: 234.67
-})
-
-function handleClick({
-  currentTarget,
-  pageX,
-}: {
-  currentTarget: EventTarget | null;
-  pageX: number;
-}) {
-  if (currentTarget instanceof HTMLElement) {
-    currentTarget.innerHTML = `<h1>Mouse Click em x:${pageX}</h1>`;
-  }
+interface Window {
+  userId: number;
 }
 
-document.documentElement.addEventListener('click', handleClick);
-
-function comparar(tipo: 'maior' | 'menor', ...numeros: number[]) {
-  if (tipo === 'maior') {
-    return Math.max(...numeros);
-  }
-  if (tipo === 'menor') {
-    return Math.min(...numeros);
-  }
-}
-
-console.log(comparar('maior', 3, 2, 4, 30, 5, 6, 20));
-console.log(comparar('menor', 3, 2, 4, 1, 5, 6, 20));
-
+window.userId = 200;
+console.log(window.userId);
