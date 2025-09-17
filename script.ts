@@ -1,74 +1,23 @@
-console.log(document.constructor)
+// Tuples são arrays que possuem dados em posições fixas
 
-// public -> padrão, pode ser acessável de qualquer lugar
-// readonly -> apenas leitura, "impede" que eu faça modificações
-// private -> impede que eu acesse a propriedade fora da classe pai
-// protected -> impede que eu acesse a propriedade fora da classe pai, mas, é possível acessar de dentro de subclasses
-// static (JS) ->
+const produto1 = ['Notebook', 2500]
+const produto2: [string, number] = ['Televisão', 6500]
 
-class Produto {
-  readonly tipo = 'produto'
-  private nome: string
-  protected preco?: number
-  public cor: 'white' | 'black' | undefined
+console.log(produto2[0].toLowerCase())
+console.log(produto2[1].toFixed(2))
 
-  constructor(nome: string, preco?: number) {
-    this.nome = nome
-    this.preco = preco
-  }
+// Torna um dado readonly e infere o tipo de dado mais específico possível. Em métodos que
+// retornam Array's, as mesmas são transformadas em Tuples.
 
-  static getDate() {
-    return new Date()
-  }
-}
+// const getText = (element: string): [HTMLElement, string] | null => {
+const getText = (element: string) => {
+  const el = document.querySelector<HTMLElement>(element)
 
-const ps5 = new Produto('PlayStation 5')
-
-console.log(Produto.getDate())
-
-console.log(ps5.tipo = 'animal')
-
-class Quadrado {
-  readonly lados = 4;
-  medida: number;
-  constructor(medida: number) {
-    this.medida = medida;
-  }
-  getPerimetro() {
-    return this.medida * this.lados;
-  }
-  getArea() {
-    return this.medida * this.medida;
-  }
-}
-
-class Circulo {
-  readonly PI = Math.PI;
-  raio: number;
-  constructor(raio: number) {
-    this.raio = raio;
-  }
-  getPerimetro() {
-    return Math.round(2 * this.PI * this.raio * 100) / 100;
-  }
-  getArea() {
-    return Math.round(this.PI * (this.raio * this.raio) * 100) / 100;
-  }
-}
-
-const formas = [2, 32, 12, 3, 4, 20, 37, 9].map((n) => {
-  if (n < 15) {
-    return new Quadrado(n);
+  if (el) {
+    return [el, el.innerText] as const
   } else {
-    return new Circulo(n);
+    return null
   }
-});
+}
 
-formas.forEach((forma) => {
-  if (forma instanceof Quadrado) {
-    console.log(forma.getArea());
-  }
-  if (forma instanceof Circulo) {
-    console.log(forma.getPerimetro());
-  }
-});
+console.log(getText(('a')))
