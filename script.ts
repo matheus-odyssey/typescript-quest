@@ -1,39 +1,74 @@
-type Produto = {
-  preco: number;
-};
+console.log(document.constructor)
 
-type Carro = {
-  rodas: number;
-  portas: number;
-};
+// public -> padrão, pode ser acessável de qualquer lugar
+// readonly -> apenas leitura, "impede" que eu faça modificações
+// private -> impede que eu acesse a propriedade fora da classe pai
+// protected -> impede que eu acesse a propriedade fora da classe pai, mas, é possível acessar de dentro de subclasses
+// static (JS) ->
 
-function handleProdutoCarro(dados: Carro & Produto) {
-  dados.rodas;
-  dados.portas;
-  dados.preco;
+class Produto {
+  readonly tipo = 'produto'
+  private nome: string
+  protected preco?: number
+  public cor: 'white' | 'black' | undefined
+
+  constructor(nome: string, preco?: number) {
+    this.nome = nome
+    this.preco = preco
+  }
+
+  static getDate() {
+    return new Date()
+  }
 }
 
-type Pessoa = {
-  nome: string,
-  idade: number,
+const ps5 = new Produto('PlayStation 5')
+
+console.log(Produto.getDate())
+
+console.log(ps5.tipo = 'animal')
+
+class Quadrado {
+  readonly lados = 4;
+  medida: number;
+  constructor(medida: number) {
+    this.medida = medida;
+  }
+  getPerimetro() {
+    return this.medida * this.lados;
+  }
+  getArea() {
+    return this.medida * this.medida;
+  }
 }
 
-type PessoaComCPF = Pessoa & {
-  cpf: string,
+class Circulo {
+  readonly PI = Math.PI;
+  raio: number;
+  constructor(raio: number) {
+    this.raio = raio;
+  }
+  getPerimetro() {
+    return Math.round(2 * this.PI * this.raio * 100) / 100;
+  }
+  getArea() {
+    return Math.round(this.PI * (this.raio * this.raio) * 100) / 100;
+  }
 }
 
-interface InterfacePessoa {
-  nome: string
-  idade: number
-}
+const formas = [2, 32, 12, 3, 4, 20, 37, 9].map((n) => {
+  if (n < 15) {
+    return new Quadrado(n);
+  } else {
+    return new Circulo(n);
+  }
+});
 
-interface InterfacePessoa {
-  cpf: string
-}
-
-interface Window {
-  userId: number;
-}
-
-window.userId = 200;
-console.log(window.userId);
+formas.forEach((forma) => {
+  if (forma instanceof Quadrado) {
+    console.log(forma.getArea());
+  }
+  if (forma instanceof Circulo) {
+    console.log(forma.getPerimetro());
+  }
+});
