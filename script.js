@@ -17,3 +17,22 @@ const getText = (element) => {
     }
 };
 console.log(getText(('a')));
+const handleVendas = (vendas) => {
+    if (vendas) {
+        let totalVendas = 0;
+        vendas.forEach((venda) => {
+            document.body.innerHTML += `
+        <h2>${venda[0].toUpperCase()}</h2>
+        <p>Vendas: R$ ${venda[1].toFixed(2)}</p>
+      `;
+            totalVendas += venda[1];
+        });
+        document.body.innerHTML += `Total de vendas: R$ ${totalVendas}`;
+    }
+};
+const fetchVendas = async (url) => {
+    const response = await fetch(url);
+    const json = await response.json();
+    handleVendas(json);
+};
+fetchVendas('https://api.origamid.dev/json/vendas.json');
