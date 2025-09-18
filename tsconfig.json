@@ -6,7 +6,8 @@
     "removeComments": true,
     "strict": true,
     "noImplicitReturns": true,
-    "outDir": "build"
+    "outDir": "build",
+    "isolatedModules": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

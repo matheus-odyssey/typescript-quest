@@ -1,13 +1,3 @@
-"use strict";
-const msg = 'Hello World';
-const btn = document.querySelector('button');
-const txt = 'My Github profile is matheushnt';
-console.log(txt);
-const handleProduto = (dados) => {
-    return dados.toLowerCase();
-};
-function handleClick() {
-    console.log(this);
-}
-document.documentElement.addEventListener('click', handleClick);
+import { pluginSlide } from './plugin-slide.js';
+pluginSlide();
 //# sourceMappingURL=script.js.map
