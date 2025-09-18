@@ -1,6 +1,6 @@
-import { profileGitHub } from "./global.js";
-export const pluginSlide = (selector) => {
-    return `${selector} ativou slide`;
+"use strict";
+const user = {
+    id: crypto.randomUUID(),
+    nome: 'Matheus',
 };
-console.log(profileGitHub);
 //# sourceMappingURL=plugin-slide.js.map

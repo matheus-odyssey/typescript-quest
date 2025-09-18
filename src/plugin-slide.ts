@@ -1,7 +1,4 @@
-import { profileGitHub } from "./global.js"
-
-export const pluginSlide = (selector: string) => {
-  return `${selector} ativou slide`
+const user: Usuario = {
+  id: crypto.randomUUID(),
+  nome: 'Matheus',
 }
-
-console.log(profileGitHub)

@@ -1,2 +1,2 @@
-export const profileGitHub = 'https://github.com/matheushnt';
+"use strict";
 //# sourceMappingURL=global.js.map

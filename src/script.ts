@@ -1,6 +1,18 @@
-import { pluginSlide } from './plugin-slide.js'
-import { profileGitHub } from './global.js'
+declare global {
+  interface Usuario {
+    nome: string
+    id: string
+  }
+}
 
-console.log(pluginSlide('a'))
+interface Produto {
+  nome: string
+  preco: string
+  cor: string
+}
 
-console.log(profileGitHub)
+export const livro: Produto = {
+  nome: 'PlayStation 5',
+  preco: '4700',
+  cor: 'branco'
+}
