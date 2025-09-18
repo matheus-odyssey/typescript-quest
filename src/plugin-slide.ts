@@ -1,3 +1,7 @@
-export const pluginSlide = () => {
-  console.log('Slide Ativo')
+import { profileGitHub } from "./global.js"
+
+export const pluginSlide = (selector: string) => {
+  return `${selector} ativou slide`
 }
+
+console.log(profileGitHub)
