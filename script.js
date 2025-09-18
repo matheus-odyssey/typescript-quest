@@ -1,17 +1,38 @@
 "use strict";
-let chave;
-// let chave: 'nome' | 'preco' | 'lote'
-chave = "lote";
-// Já vimos o typeof do JavaScript, responsável por retornar o tipo do dado. No TypeScript
-// podemos utilizar ele para indicar que um dado possui o mesmo tipo que outro.
-function coordenadas(x, y) {
-    return { x, y, };
+// Com o Partial<Tipo>, podemos indicar que todas as propriedades da interface passada em Tipo, são opcionais.
+function exibirProduto(produto) {
+    if (produto.nome) {
+        console.log(produto.nome);
+    }
 }
-let coord;
-coord = (x, y) => {
-    return { x, y, };
+const prod1 = {
+    nome: 'Notebook',
+    preco: 3000,
+    memoria: '256GB'
 };
-function selectElement(selector) {
-    return document.querySelector(selector);
+const prod2 = {
+    nome: 'Monitor',
+    preco: 1400,
+    tipoTela: 'IPS'
+};
+exibirProduto(prod1);
+exibirProduto(prod2);
+const artigo = {
+    titulo: 'Como aprender TypeScript',
+    visualizacoes: 3475,
+    tags: ['TypeScript', 'Front-end', 'TS'],
+    autor: 'Matheus'
+};
+console.log(artigo.titulo);
+console.log(artigo.tags);
+if (typeof artigo.autor === 'string') {
+    console.log(artigo.autor.toUpperCase());
 }
-const element = selectElement('body');
+const mostrarTitulo = (obj) => {
+    if ('titulo' in obj) {
+        console.log(obj.titulo);
+    }
+};
+mostrarTitulo({});
+mostrarTitulo({ titulo: 'Hello World' });
+mostrarTitulo({ nome: 'John Doe' });
